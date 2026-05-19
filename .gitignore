@@ -1,0 +1,28 @@
+# 排除 Python 编译缓存（必须排除，否则文件成百上千）
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 排除 Python 虚拟环境（如果你把环境装在项目里了）
+venv/
+env/
+.venv/
+
+# 排除开发工具的配置（VS Code 或 PyCharm）
+.vscode/
+.idea/
+
+# 排除数据文件和临时大文件（可选：如果你的 Parquet 或数据很大，建议排除）
+*.parquet
+*.log
+
+# 【核心拉黑名单】排除所有数据、图表、压缩包和精密星历
+*.csv
+*.png
+*.zip
+*.gz
+*.sp3
+
+*.egg-info/
+*.pdf
