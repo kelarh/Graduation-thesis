@@ -57,7 +57,7 @@ header-includes:
 
 本文所建立的滑动窗口分析框架及多方法互验流程，为低轨卫星在极端空间天气条件下的轨道衰减监测与预警提供了可靠的技术手段。未来可将该方法扩展至更多卫星任务和磁暴事件，融合高分辨率太阳风参数，发展机器学习短期预报模型，并推动开源共享，服务于空间天气业务化预警。
 
-**关键词**：磁暴；CHAMP卫星；轨道衰减；半长轴；能量法；高斯变分方程；DSST；滑动窗口分析；空间天气
+**关键词**：低轨卫星，轨道衰减，空间天气，能量守恒，高斯变分方程
 
 \newpage
 
@@ -69,4 +69,4 @@ The results show that during quiet periods (Dst > –30 nT, Kp ≤ 3), the decay
 
 The sliding‑window analysis framework and the multi‑method cross‑validation procedure established in this paper provide a reliable technical means for monitoring and warning of orbital decay of low‑Earth‑orbit satellites under extreme space weather conditions. Future work will extend the method to more satellite missions and magnetic storm events, integrate high‑resolution solar wind parameters, develop machine‑learning‑based short‑term forecast models, and promote open sharing, aiming to support operational space weather services.
 
-**Keywords**: geomagnetic storm; CHAMP satellite; orbital decay; semi‑major axis; energy method; Gauss variational equations; DSST; sliding window analysis; space weather
+**Keywords**: Low Earth Orbit satellites, orbital decay, space weather, energy conservation, Gaussian variational equations

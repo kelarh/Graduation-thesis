@@ -116,9 +116,9 @@ Dst指数（Disturbance Storm Time index）由Sugiura于1964年提出，旨在�
 
 ## 结果对比分析
 
-![图4.1]("figures\dstkp.png")
-![图4.2]("figures\kp_ap.png")
-![图4.3]("figures\decay_rate_global.png")
+![2003年10.1至12.1空间天气指标dst/kp对照图]("figures\dstkp.png")
+![2003年10.1至12.1空间天气指标ap/kp对照图]("figures\kp_ap.png")
+![2003年10.1至12.1磁暴前后时间段轨道衰减模拟对比图]("figures\decay_rate_global.png")
 图4.1，4.2给出了2003年10月1日至12月1日（万圣节磁暴前后）的Dst、Kp及ap指数变化情况，图4.3（下/右）展示了同一时间段内由能量法、高斯变分数值积分法以及DSST+SG滤波三种方法分别计算得到的CHAMP卫星半长轴衰减率（单位：m/h）。
 
 从地磁活动指数来看，2003年10月下旬至11月期间多次出现强磁暴事件。其中最剧烈的两次分别发生在**10月29–31日**和**11月20日前后**：后者Dst指数最低达到约**–422 nT**，Kp指数多次达到9−，ap指数同步大幅上升，属于极端地磁暴（NOAA G5级）。
