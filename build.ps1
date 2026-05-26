@@ -32,18 +32,26 @@ pandoc main.md `
     --toc *> $null
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "❌ Pandoc 转换失败，请检查报错信息。" -ForegroundColor Red
+    Write-Host "Pandoc conversion failed. Check errors." -ForegroundColor Red
     exit $LASTEXITCODE
 }
 
 # 去掉 microtype 以规避 MiKTeX 的配置报错
+# 同时插入 bibliography style 和按 .bib 文件顺序生成的 \nocite{...}
+$bibfile = Join-Path $PSScriptRoot 'references\thesis_ref.bib'
+$bibkeys = @()
+if (Test-Path $bibfile) {
+    $bibkeys = Get-Content $bibfile | ForEach-Object {
+        if ($_ -match '^\s*@\w+\{([^,]+),') { $matches[1] }
+    } | Where-Object { $_ -ne $null }
+}
+$nocite = '\nocite{' + ($bibkeys -join ',') + '}'
+
 $lines = Get-Content $texFile
 $filtered = @()
 $skip = $false
+$insertedNocite = $false
 foreach ($line in $lines) {
-    if ($line -match '\\bibliographystyle\{') {
-        continue
-    }
     if ($line -like '*microtype.sty*') {
         $skip = $true
         continue
@@ -54,13 +62,29 @@ foreach ($line in $lines) {
         }
         continue
     }
+    # replace bibliography style to unsrtnat to use citation order
+    if ($line -match '^\s*\\bibliographystyle\{') {
+        $filtered += '\bibliographystyle{unsrtnat}'
+        continue
+    }
+    # insert nocite right after \begin{document} so nocite dictates order
+    if (-not $insertedNocite -and ($line -match '^\s*\\begin\{document\}')) {
+        $filtered += $line
+        if ($bibkeys.Count -gt 0) { $filtered += $nocite }
+        $insertedNocite = $true
+        continue
+    }
+    # 在 \bibliography{...} 前插入样式和 nocite（按 .bib 文件顺序）
+    if ($line -match '^\s*\\bibliography\{') {
+        # ensure bibliography line preserved
+    }
     $filtered += $line
 }
 Set-Content $texFile $filtered
 
 xelatex -halt-on-error -interaction=nonstopmode -output-directory=output $texFile *> $null
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "❌ XeLaTeX 编译失败，请检查报错信息。" -ForegroundColor Red
+    Write-Host "XeLaTeX compilation failed. Check errors." -ForegroundColor Red
     exit $LASTEXITCODE
 }
 
@@ -71,9 +95,45 @@ if (Test-Path $auxFile) {
 }
 
 if ($hasCitations) {
+    # Clean duplicate \bibstyle lines in .aux (some templates write it multiple times)
+    if (Test-Path $auxFile) {
+        $auxLines = Get-Content $auxFile
+        $firstBibstyleFound = $false
+        $newAux = @()
+        foreach ($l in $auxLines) {
+            if ($l -match '^\\bibstyle\{') {
+                if (-not $firstBibstyleFound) {
+                    # force first bibstyle to unsrtnat so bibtex uses it
+                    $newAux += '\bibstyle{unsrtnat}'
+                    $firstBibstyleFound = $true
+                } else {
+                    # skip duplicate
+                    continue
+                }
+            } else {
+                $newAux += $l
+            }
+        }
+        # Keep original lines except ensure the first \bibstyle is exactly '\bibstyle{unsrtnat}'
+        $finalAux = @()
+        $firstBibstyleFound = $false
+        foreach ($ln in $auxLines) {
+            if ($ln -match 'bibstyle\{') {
+                if (-not $firstBibstyleFound) {
+                    $finalAux += '\bibstyle{unsrtnat}'
+                    $firstBibstyleFound = $true
+                } else {
+                    continue
+                }
+            } else {
+                $finalAux += $ln
+            }
+        }
+        Set-Content -Path $auxFile -Value $finalAux
+    }
     bibtex output/thesis *> $null
     if ($LASTEXITCODE -ne 0) {
-        Write-Host "❌ BibTeX 编译失败，请检查报错信息。" -ForegroundColor Red
+        Write-Host "BibTeX compilation failed. Check errors." -ForegroundColor Red
         exit $LASTEXITCODE
     }
 }
@@ -91,7 +151,7 @@ if ($LASTEXITCODE -eq 0) {
 }
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "✅ 编译成功！" -ForegroundColor Green
+    Write-Host "Compilation succeeded!" -ForegroundColor Green
 } else {
-    Write-Host "❌ 编译失败，请检查报错信息。" -ForegroundColor Red
+    Write-Host "Compilation failed. Check the logs in output/." -ForegroundColor Red
 }
