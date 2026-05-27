@@ -49,11 +49,11 @@ $$
 
 ### 阻力加速度在 RTN 坐标系下的分解
 
-高斯型摄动方程通常采用 **RTN**（径向‑横向‑法向）坐标系描述摄动加速度分量。RTN 坐标系定义如下 [@vallado2013]：  
+高斯型摄动方程通常采用 RTN（径向‑横向‑法向）坐标系描述摄动加速度分量。RTN 坐标系定义如下 [@vallado2013]：  
 
-- **径向** $\hat{\mathbf{r}} = \mathbf{r} / r$，沿地心指向卫星；  
-- **横向** $\hat{\mathbf{t}} = \hat{\mathbf{h}} \times \hat{\mathbf{r}}$，其中 $\hat{\mathbf{h}} = (\mathbf{r} \times \mathbf{v}) / \|\mathbf{r} \times \mathbf{v}\|$，在轨道平面内垂直于径向且指向运动方向；  
-- **法向** $\hat{\mathbf{n}} = \hat{\mathbf{r}} \times \hat{\mathbf{t}}$，沿轨道角动量方向。
+径向 $\hat{\mathbf{r}} = \mathbf{r} / r$，沿地心指向卫星；  
+横向 $\hat{\mathbf{t}} = \hat{\mathbf{h}} \times \hat{\mathbf{r}}$，其中 $\hat{\mathbf{h}} = (\mathbf{r} \times \mathbf{v}) / \|\mathbf{r} \times \mathbf{v}\|$，在轨道平面内垂直于径向且指向运动方向；  
+法向 $\hat{\mathbf{n}} = \hat{\mathbf{r}} \times \hat{\mathbf{t}}$，沿轨道角动量方向。
 
 摄动加速度 $\mathbf{a}_{\text{drag}}$ 在 RTN 下的三个分量为  
 
@@ -67,12 +67,9 @@ $$
 
 ### 大气密度模型 JB2008
 
-式 (1) 中的大气密度 $\rho$ 是计算摄动的关键输入。由于 $\rho$ 随高度、地方时、太阳活动（F10.7 指数及其 81 天均值）和地磁活动（Ap 和 Dst 指数）剧烈变化，必须采用经验或半经验模型。本文采用 **JB2008**（Jacchia‑Bowman 2008）热层密度模型，其主要特征如下 [@bowman2008]：  
+JB2008 大气模型是一种用于描述地球热层密度变化的经验模型，由美国空军空间司令部与 Space Environment Technologies 联合提出，是在 Jacchia 系列模型基础上的改进模型。该模型主要用于计算低轨卫星所受的大气阻力及轨道衰减过程，在卫星轨道预报、空间目标定轨以及空间环境研究中具有广泛应用。JB2008 模型以卫星拖曳观测数据和多源空间环境参数为基础，引入了 F10.7 太阳射电流量、S10 紫外辐射指数、M10 中层大气指数以及 Y10 X 射线与莱曼-α 辐射指数等多种太阳活动参数，同时结合 Dst 修正项以表征地磁扰动对热层密度的影响，因此相比传统 Jacchia 模型能够更准确地反映高太阳活动和强磁暴条件下的大气密度变化特征。该模型在强空间天气事件期间对热层密度突增现象具有较好的响应能力，能够有效提高低轨卫星轨道衰减计算精度，因此被广泛应用于空间天气效应分析与航天任务轨道动力学研究中。
 
-- 覆盖高度 175 km 至 1000 km，适用于绝大多数 LEO 卫星；  
-- 使用改进的太阳极紫外（EUV）和远紫外（FUV）辐射指标（$S_{10.7}$、$S_{10.7}^{81}$、$M_{10.7}$ 等）；  
-- 引入 $D_{st}$ 指数驱动地磁暴期间的全球密度响应；  
-- 与 CHAMP、GRACE、GOCE 等高精度加速度计反演密度比对，偏差优于 15%。
+式 (1) 中的大气密度 $\rho$ 是计算摄动的关键输入。由于 $\rho$ 随高度、地方时、太阳活动（F10.7 指数及其 81 天均值）和地磁活动（Ap 和 Dst 指数）剧烈变化，必须采用经验或半经验模型。本文采用 JB2008（Jacchia‑Bowman 2008）热层密度模型，其主要特征 [@bowman2008]：覆盖高度 175 km 至 1000 km，适用于绝大多数 LEO 卫星使用改进的太阳极紫外（EUV）和远紫外（FUV）辐射指标（$S_{10.7}$、$S_{10.7}^{81}$、$M_{10.7}$ 等）；引入 $D_{st}$ 指数驱动地磁暴期间的全球密度响应；与 CHAMP、GRACE、GOCE 等高精度加速度计反演密度比对，偏差优于 15%。
 
 JB2008 已被 COSPAR 推荐为热层密度参考模型，并集成于 Orekit 等主流轨道动力学库中 [@pardini2026; @orekitjb2008]。
 
@@ -159,37 +156,37 @@ $$
 
 高斯变分方程给出了摄动加速度分量对经典轨道根数 $(a, e, i, \Omega, \omega, M)$ 的瞬时变化率。对于阻力摄动（非保守力），其完整形式为 [@bate1971; @vallado2013]：
 
-**半长轴变化率**  
+半长轴变化率  
 
 $$
 \frac{da}{dt} = \frac{2}{n\sqrt{1-e^2}} \left[ S e \sin f + T \frac{p}{r} \right] \tag{17}
 $$
 
-**偏心率变化率**  
+偏心率变化率  
 
 $$
 \frac{de}{dt} = \frac{\sqrt{1-e^2}}{na} \left[ S \sin f + T\left( \cos f + \frac{r}{p}(1+e\cos f) \right) \right] \tag{18}
 $$
 
-**轨道倾角变化率**  
+轨道倾角变化率  
 
 $$
 \frac{di}{dt} = \frac{r \cos(f+\omega)}{na^2\sqrt{1-e^2}} N \tag{19}
 $$
 
-**升交点赤经变化率**  
+升交点赤经变化率  
 
 $$
 \frac{d\Omega}{dt} = \frac{r \sin(f+\omega)}{na^2\sqrt{1-e^2} \sin i} N \tag{20}
 $$
 
-**近地点幅角变化率**  
+近地点幅角变化率  
 
 $$
 \frac{d\omega}{dt} = \frac{\sqrt{1-e^2}}{nae} \left[ -S \cos f + T \left(1+\frac{r}{p}\right) \sin f \right] - \cos i \frac{d\Omega}{dt} \tag{21}
 $$
 
-**平近点角变化率**  
+平近点角变化率  
 
 $$
 \frac{dM}{dt} = n - \frac{2Sr}{na^2} - \frac{1-e^2}{nae} \left[ -S \cos f + T \left(1+\frac{r}{p}\right) \sin f \right] \tag{22}
@@ -215,15 +212,15 @@ $$
 \mathbf{X}(t) = \mathbf{X}_0 + \int_{t_0}^t \dot{\mathbf{X}}(\tau)\, d\tau \tag{23}
 $$
 
-其中 $\dot{\mathbf{X}}$ 由式 (17)–(22) 计算，$S,T,N$ 由式 (6) 和 (5) 给出。积分过程中每一步都需要调用大气密度模型（如 JB2008）获取当前时刻、当前位置的瞬时密度 $\rho$，并更新 $\mathbf{v}_r$ 和 $\mathbf{a}_{\text{drag}}$。这种严格积分摄动方程的方法称为**高斯变分数值法**，能够精确反映大气阻力对轨道演化的累积效应，而不仅仅依赖于能量耗散的宏观积分 [@frey2019]。
+其中 $\dot{\mathbf{X}}$ 由式 (17)–(22) 计算，$S,T,N$ 由式 (6) 和 (5) 给出。积分过程中每一步都需要调用大气密度模型（如 JB2008）获取当前时刻、当前位置的瞬时密度 $\rho$，并更新 $\mathbf{v}_r$ 和 $\mathbf{a}_{\text{drag}}$。这种严格积分摄动方程的方法称为高斯变分数值法，能够精确反映大气阻力对轨道演化的累积效应，而不仅仅依赖于能量耗散的宏观积分 [@frey2019]。
 
 ## 平均轨道理论与长期衰减提取
 
 ### 密切轨道与平均轨道的基本概念
 
-在摄动轨道力学中，任意时刻卫星的真实运动状态可由**密切轨道**（osculating orbit）精确描述。密切轨道假设该瞬时所有摄动加速度突然消失，卫星将严格沿一个二体 Kepler 轨道运行。密切轨道根数 $\boldsymbol{\sigma}_{\text{osc}} = (a_{\text{osc}}, e_{\text{osc}}, i_{\text{osc}}, \Omega_{\text{osc}}, \omega_{\text{osc}}, M_{\text{osc}})^\top$ 不仅包含长期演化趋势，还叠加了与轨道周期和地球自转周期同量级的高频**短周期振荡**。这些短周期项主要源于地球非球形引力场的田谐部分、大气密度随地方时的日变化以及太阳光压的周期性作用 [@vallado2013]。
+在摄动轨道力学中，任意时刻卫星的真实运动状态可由密切轨道（osculating orbit）精确描述。密切轨道假设该瞬时所有摄动加速度突然消失，卫星将严格沿一个二体 Kepler 轨道运行。密切轨道根数 $\boldsymbol{\sigma}_{\text{osc}} = (a_{\text{osc}}, e_{\text{osc}}, i_{\text{osc}}, \Omega_{\text{osc}}, \omega_{\text{osc}}, M_{\text{osc}})^\top$ 不仅包含长期演化趋势，还叠加了与轨道周期和地球自转周期同量级的高频短周期振荡。这些短周期项主要源于地球非球形引力场的田谐部分、大气密度随地方时的日变化以及太阳光压的周期性作用 [@vallado2013]。
 
-为了研究轨道的长期演化行为（例如大气阻力引起的半长轴衰减），通常需要分离短周期项，仅保留**平均轨道根数** $\bar{\boldsymbol{\sigma}} = (\bar{a}, \bar{e}, \bar{i}, \bar{\Omega}, \bar{\omega}, \bar{M})^\top$。平均根数反映了摄动力的累积效应，剔除了高频变化，从而使得长期变化可以用较简单的微分方程描述，并且可采用大步长数值积分，显著提高计算效率 [@brouwer1959; @lyden1987]。
+为了研究轨道的长期演化行为（例如大气阻力引起的半长轴衰减），通常需要分离短周期项，仅保留平均轨道根数 $\bar{\boldsymbol{\sigma}} = (\bar{a}, \bar{e}, \bar{i}, \bar{\Omega}, \bar{\omega}, \bar{M})^\top$。平均根数反映了摄动力的累积效应，剔除了高频变化，从而使得长期变化可以用较简单的微分方程描述，并且可采用大步长数值积分，显著提高计算效率 [@brouwer1959; @lyden1987]。
 
 ### 平均化的数学定义与摄动分析
 
@@ -233,13 +230,13 @@ $$
 \frac{d\mathbf{x}}{dt} = \mathbf{f}_0(\mathbf{x}) + \varepsilon \mathbf{f}_1(\mathbf{x}, t), \tag{24}
 $$
 
-其中 $\mathbf{f}_0$ 是 Kepler 主项，$\varepsilon \mathbf{f}_1$ 为小摄动项（$\varepsilon \ll 1$）。我们寻求一个**近恒等变换**  
+其中 $\mathbf{f}_0$ 是 Kepler 主项，$\varepsilon \mathbf{f}_1$ 为小摄动项（$\varepsilon \ll 1$）。我们寻求一个近恒等变换  
 
 $$
 \mathbf{x} = \boldsymbol{\Phi}(\bar{\mathbf{x}}, t), \quad \boldsymbol{\Phi}(\bar{\mathbf{x}}, t) = \bar{\mathbf{x}} + \varepsilon \boldsymbol{\Phi}_1(\bar{\mathbf{x}}, t) + \varepsilon^2 \boldsymbol{\Phi}_2(\bar{\mathbf{x}}, t) + \cdots , \tag{25}
 $$
 
-使得变换后的平均状态 $\bar{\mathbf{x}}$ 满足**平均化运动方程**  
+使得变换后的平均状态 $\bar{\mathbf{x}}$ 满足平均化运动方程  
 
 $$
 \frac{d\bar{\mathbf{x}}}{dt} = \bar{\mathbf{f}}(\bar{\mathbf{x}}) + O(\varepsilon^2), \tag{26}
@@ -273,7 +270,7 @@ $$
 
 ### DSST 半解析法的平均化处理
 
-**DSST**（Draper Semi-analytical Satellite Theory）对每个摄动项分别推导平均化后的贡献。下面给出主要摄动项的经典平均化公式。
+DSST（Draper Semi-analytical Satellite Theory）对每个摄动项分别推导平均化后的贡献。下面给出主要摄动项的经典平均化公式。
 
 #### 地球带谐项（$J_2$ 项）的平均化
 
@@ -301,13 +298,13 @@ $$
 
 #### 大气阻力的平均化
 
-对于大气阻力，摄动加速度为式 (5)。将其投影到 RTN 分量，代入高斯方程 (17)–(18) 得到 $\dot{a}$ 和 $\dot{e}$ 的瞬时表达式。在 DSST 中，采用**共转大气**假设，并认为密度随高度指数衰减，在轨道周期内对 $\dot{a}$ 取平均。忽略短周期变化，平均半长轴衰减率可写为 [@kinghele1964; @dersch2015]
+对于大气阻力，摄动加速度为式 (5)。将其投影到 RTN 分量，代入高斯方程 (17)–(18) 得到 $\dot{a}$ 和 $\dot{e}$ 的瞬时表达式。在 DSST 中，采用共转大气假设，并认为密度随高度指数衰减，在轨道周期内对 $\dot{a}$ 取平均。忽略短周期变化，平均半长轴衰减率可写为 [@kinghele1964; @dersch2015]
 
 $$
 \frac{d\bar{a}}{dt} = -\frac{2}{\bar{n}} \frac{C_D A}{m} \bar{\rho} \bar{v}_r \bar{v}_t, \tag{33}
 $$
 
-其中 $\bar{\rho}$ 是轨道高度上的平均密度，$\bar{v}_r$ 是平均相对速度大小，$\bar{v}_t$ 是平均横向速度（近似为 $\sqrt{\mu/\bar{a}}$）。更严格的 DSST 实现采用**密度沿轨积分**的方式，利用 JB2008 模型输出沿轨道一圈的平均密度 $\langle \rho \rangle$，然后近似  
+其中 $\bar{\rho}$ 是轨道高度上的平均密度，$\bar{v}_r$ 是平均相对速度大小，$\bar{v}_t$ 是平均横向速度（近似为 $\sqrt{\mu/\bar{a}}$）。更严格的 DSST 实现采用密度沿轨积分的方式，利用 JB2008 模型输出沿轨道一圈的平均密度 $\langle \rho \rangle$，然后近似  
 
 $$
 \frac{d\bar{a}}{dt} \approx -\frac{2}{\bar{n}} \frac{C_D A}{m} \langle \rho \, v_r^2 \rangle, \tag{34}
@@ -327,7 +324,7 @@ $$
 
 ### 由密切轨道反演平均轨道：固定点转换
 
-在星载 GPS 或精密星历（如 SP3）中，我们只能获得离散时刻的密切状态 $(\mathbf{r}_j, \mathbf{v}_j)$，需要反求出对应的平均轨道根数 $\bar{\boldsymbol{\sigma}}_j$。Orekit 中采用 **FixedPointConverter** 实现这一反演。
+在星载 GPS 或精密星历（如 SP3）中，我们只能获得离散时刻的密切状态 $(\mathbf{r}_j, \mathbf{v}_j)$，需要反求出对应的平均轨道根数 $\bar{\boldsymbol{\sigma}}_j$。Orekit 中采用 FixedPointConverter 实现这一反演。
 
 设正向映射 $\mathcal{P}$：给定平均根数 $\bar{\boldsymbol{\sigma}}$，通过添加所有力模型的短周期项得到密切根数  
 
@@ -343,17 +340,17 @@ $$
 
 的固定点。具体迭代格式为：  
 
-1. 初始化 $\bar{\boldsymbol{\sigma}}^{(0)} = \boldsymbol{\sigma}_{\text{osc}}^{\text{true}}$；  
-2. 对 $k = 0,1,\dots$ 迭代：  
+初始化 $\bar{\boldsymbol{\sigma}}^{(0)} = \boldsymbol{\sigma}_{\text{osc}}^{\text{true}}$；  
+对 $k = 0,1,\dots$ 迭代：  
 
    $$
    \boldsymbol{\sigma}_{\text{osc}}^{(\text{rec})} = \mathcal{P}(\bar{\boldsymbol{\sigma}}^{(k)}), \quad
    \bar{\boldsymbol{\sigma}}^{(k+1)} = \bar{\boldsymbol{\sigma}}^{(k)} + \big( \boldsymbol{\sigma}_{\text{osc}}^{\text{true}} - \boldsymbol{\sigma}_{\text{osc}}^{(\text{rec})} \big); \tag{38}
    $$
 
-3. 当 $\|\bar{\boldsymbol{\sigma}}^{(k+1)} - \bar{\boldsymbol{\sigma}}^{(k)}\|$ 小于阈值时停止。
+当 $\|\bar{\boldsymbol{\sigma}}^{(k+1)} - \bar{\boldsymbol{\sigma}}^{(k)}\|$ 小于阈值时停止。
 
-可以证明，若 $\mathcal{P}$ 在平均根数附近是压缩映射，则该迭代线性收敛。由于短周期项的振幅通常很小（对半长轴而言典型值 $O(J_2 R_e^2/a) \sim 10^4$ m），迭代 3–5 次即可达到米级精度 [@orekitfixedpoint; @dersch2019]。该方法的优势是**不依赖时间积分**，可逐历元独立计算，非常适合批量处理。
+可以证明，若 $\mathcal{P}$ 在平均根数附近是压缩映射，则该迭代线性收敛。由于短周期项的振幅通常很小（对半长轴而言典型值 $O(J_2 R_e^2/a) \sim 10^4$ m），迭代 3–5 次即可达到米级精度 [@orekitfixedpoint; @dersch2019]。该方法的优势是不依赖时间积分，可逐历元独立计算，非常适合批量处理。
 
 ### 长期半长轴衰减的提取
 
