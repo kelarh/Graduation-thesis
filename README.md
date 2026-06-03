@@ -1,6 +1,6 @@
-# 章节导航
+# 极端空间天气对低轨卫星轨道衰减影响分析
 
-# 摘要 
+## 摘要 
 
 本文以2003年万圣节磁暴和2024年母亲节特大地磁暴为切入点，采用CHAMP（轨道高度约410 km）和GRACE鲚FO（约500 km）两颗卫星的精密轨道数据，分别使用能量法、高斯变分数值积分法和DSST平均轨道提取法三种独立手段反演了半长轴上瞬时衰减速率和累计衰减量。基于1.5小时滑动窗口得到的趋势与3个单一方法相同，但它们之间的响应不尽相同：高斯法对短时能量注入最敏感，主相峰值较高，适合抓住尖峰；能量法较为平滑稳定，累计衰减的估算更可靠；DSST结合Savitzky FA Golay滤波后生成周期曲线。这2次磁暴都使得衰减率剧烈增加——CHAMP从平静期平均−4 m/h下降至−17～−20 m/h，GRACE阓FO则从平静期−1 m/h下降至−6~−8 m/h。更高轨道上的幅度比低轨略大（5–6倍)，即热层膨胀后高海拔处密度跳升更剧烈。
 
@@ -8,7 +8,7 @@
 
 **关键词**：低轨卫星，轨道衰减，空间天气，能量守恒，高斯变分方程
 
-# Abstract
+## Abstract
 
 Taking the 2003 Halloween geomagnetic storm and the 2024 Mother’s Day major geomagnetic storm as case studies, this paper utilizes high-precision orbital data from the CHAMP (orbital altitude approximately 410 km) and GRACE-FO (approximately 500 km) satellites to invert the instantaneous decay rates and cumulative decay amounts along the semi-major axis using three independent methods: the energy method, the Gaussian variable-fraction numerical integration method, and the DSST average orbit extraction method to invert the instantaneous decay rate and cumulative decay along the semi-major axis. The trends obtained from a 1.5-hour sliding window were consistent across the three methods, but their responses differed: the Gaussian method was most sensitive to short-term energy injections, exhibited higher peak values in the main phase, and was suitable for capturing spikes; the energy method was smoother and more stable, yielding more reliable estimates of cumulative decay; the DSST method, when combined with Savitzky-FA-Golay filtering, generates periodic curves. Both geomagnetic storms caused a sharp increase in the attenuation rate—CHAMP dropped from an average of −4 m/h during quiet periods to −17 to −20 m/h, while GRACE FO dropped from −1 m/h during quiet periods to −6 to −8 m/h. Amplitudes at higher orbits were slightly larger (5–6 times) than those at lower orbits, indicating a more dramatic jump in density at high altitudes following thermospheric expansion.
 
@@ -16,8 +16,8 @@ Common features of the two events include: decay rate curves exhibiting bimodal 
 
 **Keywords**: Low Earth Orbit satellites, orbital decay, space weather, energy conservation, Gaussian variational equations
 
-# [第一章：绪论](src/01_intro.md)
-# [第二章：轨道衰减理论基础](src/02_methods.md)
-# [第三章：不同衰减计算方法的交叉验证分析](src/03_results.md)
-# [第四章：长期轨道衰减模拟与极端空间天气影响研究](src/04_application.md)
-# [第五章：总结](src/05_prospect.md)
+## [第一章：绪论](src/01_intro.md)
+## [第二章：轨道衰减理论基础](src/02_methods.md)
+## [第三章：不同衰减计算方法的交叉验证分析](src/03_results.md)
+## [第四章：长期轨道衰减模拟与极端空间天气影响研究](src/04_application.md)
+## [第五章：总结](src/05_prospect.md)
