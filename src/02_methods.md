@@ -6,9 +6,7 @@
 
 对于低地球轨道（LEO）卫星，大气阻力是最主要的非保守摄动力。根据流体动力学理论，阻力加速度的大小与大气密度、卫星的迎风面积、阻力系数以及卫星相对于大气的速度平方成正比，方向则与相对速度矢量相反 [@kinghele1964; @vallado2013]：
 
-$$
-\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho \frac{C_D A}{m} v_r \mathbf{v}_r \tag{1}
-$$
+$$\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho \frac{C_D A}{m} v_r \mathbf{v}_r \tag{1}$$
 
 式中：  
 $\rho$ —— 大气密度（kg/m³），受太阳活动和地磁活动强烈调制；  
