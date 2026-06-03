@@ -93,13 +93,13 @@ GRACE‑A（Gravity Recovery and Climate Experiment）卫星运行于约 $350\ \
 
 $$
 a = -\frac{\mu}{2\mathcal{E}} \quad\Longrightarrow\quad 
-\Delta a = a(t_2) - a(t_1) = -\frac{\mu}{2\mathcal{E}(t_2)} + \frac{\mu}{2\mathcal{E}(t_1)} \tag{45}
+\Delta a = a(t_2) - a(t_1) = -\frac{\mu}{2\mathcal{E}(t_2)} + \frac{\mu}{2\mathcal{E}(t_1)} \qquad(45)
 $$
 
 将式(45)与式(2)联立，消去 $\mathcal{E}(t_1)$ 可得 $\Delta a$ 的显式表达式：
 
 $$
-\Delta a = a(t_1)\left( \frac{\mu}{\mu - 2\Delta\mathcal{E}\, a(t_1)} - 1 \right) \tag{46}
+\Delta a = a(t_1)\left( \frac{\mu}{\mu - 2\Delta\mathcal{E}\, a(t_1)} - 1 \right) \qquad(46)
 $$
 
 其中 $\Delta\mathcal{E} = \mathcal{E}(t_2) - \mathcal{E}(t_1)$。实际计算时，$\mathcal{E}(t)$ 由卫星的位置 $\mathbf{r}(t)$ 和速度 $\mathbf{v}(t)$ 直接计算：$\mathcal{E} = v^2/2 - \mu/r$。为扣除保守力摄动（地球非球形引力、日月引力、潮汐等）对能量变化的贡献，本章采用数值积分法精确计算时变引力场（见2.7节），从而得到仅由大气阻力等非保守力引起的 $\Delta\mathcal{E}$，代入式(46)即得轨道衰减量。
@@ -107,13 +107,13 @@ $$
 高斯变分数值积分法：高斯变分方程直接给出了摄动加速度分量对轨道根数的瞬时变化率。对于半长轴，由式(17)：
 
 $$
-\frac{da}{dt} = \frac{2}{n\sqrt{1-e^2}} \left[ S e \sin f + T \frac{p}{r} \right] \tag{47}
+\frac{da}{dt} = \frac{2}{n\sqrt{1-e^2}} \left[ S e \sin f + T \frac{p}{r} \right] \qquad(47)
 $$
 
 其中 $S$ 和 $T$ 分别为摄动加速度在RTN坐标系下的径向和横向分量。对于大气阻力，$S$ 和 $T$ 通过式(15)和式(16)计算，并代入式(47)。给定初始轨道根数 $\mathbf{X}_0$，采用四阶Runge‑Kutta方法数值积分：
 
 $$
-\mathbf{X}(t) = \mathbf{X}_0 + \int_{t_0}^{t} \dot{\mathbf{X}}(\tau)\, d\tau \tag{48}
+\mathbf{X}(t) = \mathbf{X}_0 + \int_{t_0}^{t} \dot{\mathbf{X}}(\tau)\, d\tau \qquad(48)
 $$
 
 积分过程中，每一步调用JB2008大气密度模型获取当前历元、当前位置的瞬时密度 $\rho$，更新阻力加速度。最终得到半长轴 $a(t)$ 的时间序列，其衰减量即为 $\Delta a(t) = a(t) - a(t_0)$。该方法严格遵循轨道力学定义，物理意义明确，但计算量较大。
@@ -123,14 +123,14 @@ $$
 在磁暴期间，$\bar{a}(t)$ 近似线性下降。设
 
 $$
-\bar{a}(t) = a_0 + \dot{a} \cdot t + \varepsilon(t) \tag{49}
+\bar{a}(t) = a_0 + \dot{a} \cdot t + \varepsilon(t) \qquad(49)
 $$
 
 其中 $\dot{a}$ 为平均衰减率（m/s或m/h），$\varepsilon(t)$ 为残余振荡。通过对时间序列 $\{t_j, \bar{a}_j\}$ 进行最小二乘线性拟合：
 
 $$
 \hat{\dot{a}} = \frac{\sum (t_j - \bar{t})(\bar{a}_j - \bar{\bar{a}})}{\sum (t_j - \bar{t})^2}, \quad
-\hat{a}_0 = \bar{\bar{a}} - \hat{\dot{a}} \bar{t} \tag{50}
+\hat{a}_0 = \bar{\bar{a}} - \hat{\dot{a}} \bar{t} \qquad(50)
 $$
 
 则任意时刻的平均半长轴衰减量为 $\Delta \bar{a}(t) = \hat{\dot{a}} \cdot t$。

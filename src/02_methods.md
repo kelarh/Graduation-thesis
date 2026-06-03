@@ -6,7 +6,9 @@
 
 对于低地球轨道（LEO）卫星，大气阻力是最主要的非保守摄动力。根据流体动力学理论，阻力加速度的大小与大气密度、卫星的迎风面积、阻力系数以及卫星相对于大气的速度平方成正比，方向则与相对速度矢量相反 [@kinghele1964; @vallado2013]：
 
-$$\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho \frac{C_D A}{m} v_r \mathbf{v}_r \tag{1}$$
+$$
+\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho \frac{C_D A}{m} v_r \mathbf{v}_r \qquad (1)
+$$
 
 式中：  
 $\rho$ —— 大气密度（kg/m³），受太阳活动和地磁活动强烈调制；  
@@ -18,7 +20,7 @@ $\mathbf{v}_r$ —— 卫星相对于大气的速度矢量（m/s），$v_r = \|\
 定义弹道系数 $B = C_D A / m$，则阻力加速度可简记为  
 
 $$
-\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho B v_r \mathbf{v}_r \tag{2}
+\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho B v_r \mathbf{v}_r \qquad(2)
 $$
 
 弹道系数集中反映了卫星自身属性对阻力摄动的敏感程度：$B$ 值越大，阻力作用越强，轨道衰减也越快。
@@ -28,19 +30,19 @@ $$
 大气并非静止不动，而是随地球自转近似共转。设地球自转角速度矢量为 $\boldsymbol{\omega}_e$（大小 $\omega_e = 7.292115\times10^{-5}$ rad/s，方向沿地轴指向北极），则在惯性系（如 GCRF）中，大气共转速度可写作 [@bate1971]：
 
 $$
-\mathbf{v}_{\text{atm}} = \boldsymbol{\omega}_e \times \mathbf{r} \tag{3}
+\mathbf{v}_{\text{atm}} = \boldsymbol{\omega}_e \times \mathbf{r} \qquad(3)
 $$
 
 其中 $\mathbf{r}$ 为卫星的地心位置矢量。因此卫星相对于大气的速度为  
 
 $$
-\mathbf{v}_r = \mathbf{v} - \boldsymbol{\omega}_e \times \mathbf{r} \tag{4}
+\mathbf{v}_r = \mathbf{v} - \boldsymbol{\omega}_e \times \mathbf{r} \qquad(4)
 $$
 
 将 (4) 代入 (1)，得到惯性系下完整的阻力加速度表达式：
 
 $$
-\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho B \|\mathbf{v} - \boldsymbol{\omega}_e \times \mathbf{r}\| (\mathbf{v} - \boldsymbol{\omega}_e \times \mathbf{r}) \tag{5}
+\mathbf{a}_{\text{drag}} = -\frac{1}{2} \rho B \|\mathbf{v} - \boldsymbol{\omega}_e \times \mathbf{r}\| (\mathbf{v} - \boldsymbol{\omega}_e \times \mathbf{r}) \qquad(5)
 $$
 
 该模型已在 Orekit 等轨道动力学库中标准实现 [@orekitjb2008]。
@@ -58,7 +60,7 @@ $$
 $$
 S = \mathbf{a}_{\text{drag}} \cdot \hat{\mathbf{r}}, \quad
 T = \mathbf{a}_{\text{drag}} \cdot \hat{\mathbf{t}}, \quad
-N = \mathbf{a}_{\text{drag}} \cdot \hat{\mathbf{n}} \tag{6}
+N = \mathbf{a}_{\text{drag}} \cdot \hat{\mathbf{n}} \qquad(6)
 $$
 
 对于大气阻力，由于相对速度 $\mathbf{v}_r$ 主要包含横向分量（轨道速度远大于大气共转速度），通常 $S$ 和 $T$ 为负值，而 $N$ 很小但不为零（取决于大气共转与轨道倾角）。
@@ -78,13 +80,13 @@ JB2008 已被 COSPAR 推荐为热层密度参考模型，并集成于 Orekit 等
 两体问题中，卫星在中心天体引力场中运动的比机械能（单位质量的总能量）由动能与势能之和给出：
 
 $$
-\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r} \tag{7}
+\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r} \qquad(7)
 $$
 
 其中 $v = \|\mathbf{v}\|$，$r = \|\mathbf{r}\|$，$\mu = GM$ 为地球引力常数。根据轨道力学基本结果，比机械能也可用轨道半长轴 $a$ 简单表示为  
 
 $$
-\mathcal{E} = -\frac{\mu}{2a} \tag{8}
+\mathcal{E} = -\frac{\mu}{2a} \qquad(8)
 $$
 
 这一关系对椭圆轨道（$a>0$）成立：轨道能量完全由半长轴决定，能量越低（越负）时轨道半径越小，卫星束缚越紧 [@vallado2013; @bate1971]。
@@ -94,39 +96,39 @@ $$
 将比机械能 $\mathcal{E}$ 对时间求导：
 
 $$
-\frac{d\mathcal{E}}{dt} = \mathbf{v} \cdot \frac{d\mathbf{v}}{dt} + \frac{\mu}{r^3} \mathbf{r} \cdot \mathbf{v} \tag{9}
+\frac{d\mathcal{E}}{dt} = \mathbf{v} \cdot \frac{d\mathbf{v}}{dt} + \frac{\mu}{r^3} \mathbf{r} \cdot \mathbf{v} \qquad(9)
 $$
 
 地球中心引力加速度为 $-\mu \mathbf{r}/r^3$，因此卫星总加速度为  
 
 $$
-\frac{d\mathbf{v}}{dt} = -\frac{\mu}{r^3}\mathbf{r} + \mathbf{a}_{\text{drag}} \tag{10}
+\frac{d\mathbf{v}}{dt} = -\frac{\mu}{r^3}\mathbf{r} + \mathbf{a}_{\text{drag}} \qquad(10)
 $$
 
 代入 (9) 得  
 
 $$
 \frac{d\mathcal{E}}{dt} = \mathbf{v} \cdot \left(-\frac{\mu}{r^3}\mathbf{r} + \mathbf{a}_{\text{drag}}\right) + \frac{\mu}{r^3} \mathbf{r} \cdot \mathbf{v}
-= \mathbf{v} \cdot \mathbf{a}_{\text{drag}} \tag{11}
+= \mathbf{v} \cdot \mathbf{a}_{\text{drag}} \qquad(11)
 $$
 
 可见，大气阻力引起的比机械能变化率 $\dot{\mathcal{E}}$ 恰好是单位质量的阻力瞬时功率 $P_m = \mathbf{v} \cdot \mathbf{a}_{\text{drag}}$。  
 由式 (8) 对时间求导：
 
 $$
-\frac{d\mathcal{E}}{dt} = \frac{\mu}{2a^2} \frac{da}{dt} \tag{12}
+\frac{d\mathcal{E}}{dt} = \frac{\mu}{2a^2} \frac{da}{dt} \qquad(12)
 $$
 
 联立 (11) 与 (12) 得  
 
 $$
-\frac{da}{dt} = \frac{2a^2}{\mu} \mathbf{v} \cdot \mathbf{a}_{\text{drag}} \tag{13}
+\frac{da}{dt} = \frac{2a^2}{\mu} \mathbf{v} \cdot \mathbf{a}_{\text{drag}} \qquad(13)
 $$
 
 再将 (1) 代入，得到更具物理直观性的方程  
 
 $$
-\frac{da}{dt} = -\frac{a^2}{\mu} \rho \frac{C_D A}{m} \|\mathbf{v}_r\| (\mathbf{v} \cdot \mathbf{v}_r) \tag{14}
+\frac{da}{dt} = -\frac{a^2}{\mu} \rho \frac{C_D A}{m} \|\mathbf{v}_r\| (\mathbf{v} \cdot \mathbf{v}_r) \qquad(14)
 $$
 
 式 (14) 定量给出了半长轴瞬时衰减率与大气密度、卫星弹道系数以及速度几何关系之间的联系 [@shoemaker2014; @rubincam1982]。由于大气密度和速度方向均随时间变化，$da/dt$ 并非恒定，通常需要数值积分求解总衰减量。
@@ -137,13 +139,13 @@ $$
 
 $$
 \Delta a(t) = a(t) - a(t_0) = \int_{t_0}^{t} \frac{da}{d\tau} d\tau
-= \int_{t_0}^{t} \frac{2a^2(\tau)}{\mu} \mathbf{v}(\tau) \cdot \mathbf{a}_{\text{drag}}(\tau) d\tau \tag{15}
+= \int_{t_0}^{t} \frac{2a^2(\tau)}{\mu} \mathbf{v}(\tau) \cdot \mathbf{a}_{\text{drag}}(\tau) d\tau \qquad(15)
 $$
 
 对于离散观测数据（例如从精密星历 CSV 文件读取的一系列轨道状态），可采用梯形法则近似：
 
 $$
-\Delta a \approx \sum_{i=1}^{n-1} \frac{1}{2} \left[ \left(\frac{da}{dt}\right)_i + \left(\frac{da}{dt}\right)_{i-1} \right] (t_i - t_{i-1}) \tag{16}
+\Delta a \approx \sum_{i=1}^{n-1} \frac{1}{2} \left[ \left(\frac{da}{dt}\right)_i + \left(\frac{da}{dt}\right)_{i-1} \right] (t_i - t_{i-1}) \qquad(16)
 $$
 
 这种基于能量耗散直接积分得到半长轴衰减量的方法，相较于直接数值积分轨道状态向量具有更清晰的物理意义，且便于耦合不同的大气密度模型 [@frey2019; @kinghele2024]。
@@ -157,37 +159,37 @@ $$
 半长轴变化率  
 
 $$
-\frac{da}{dt} = \frac{2}{n\sqrt{1-e^2}} \left[ S e \sin f + T \frac{p}{r} \right] \tag{17}
+\frac{da}{dt} = \frac{2}{n\sqrt{1-e^2}} \left[ S e \sin f + T \frac{p}{r} \right] \qquad(17)
 $$
 
 偏心率变化率  
 
 $$
-\frac{de}{dt} = \frac{\sqrt{1-e^2}}{na} \left[ S \sin f + T\left( \cos f + \frac{r}{p}(1+e\cos f) \right) \right] \tag{18}
+\frac{de}{dt} = \frac{\sqrt{1-e^2}}{na} \left[ S \sin f + T\left( \cos f + \frac{r}{p}(1+e\cos f) \right) \right] \qquad(18)
 $$
 
 轨道倾角变化率  
 
 $$
-\frac{di}{dt} = \frac{r \cos(f+\omega)}{na^2\sqrt{1-e^2}} N \tag{19}
+\frac{di}{dt} = \frac{r \cos(f+\omega)}{na^2\sqrt{1-e^2}} N \qquad(19)
 $$
 
 升交点赤经变化率  
 
 $$
-\frac{d\Omega}{dt} = \frac{r \sin(f+\omega)}{na^2\sqrt{1-e^2} \sin i} N \tag{20}
+\frac{d\Omega}{dt} = \frac{r \sin(f+\omega)}{na^2\sqrt{1-e^2} \sin i} N \qquad(20)
 $$
 
 近地点幅角变化率  
 
 $$
-\frac{d\omega}{dt} = \frac{\sqrt{1-e^2}}{nae} \left[ -S \cos f + T \left(1+\frac{r}{p}\right) \sin f \right] - \cos i \frac{d\Omega}{dt} \tag{21}
+\frac{d\omega}{dt} = \frac{\sqrt{1-e^2}}{nae} \left[ -S \cos f + T \left(1+\frac{r}{p}\right) \sin f \right] - \cos i \frac{d\Omega}{dt} \qquad(21)
 $$
 
 平近点角变化率  
 
 $$
-\frac{dM}{dt} = n - \frac{2Sr}{na^2} - \frac{1-e^2}{nae} \left[ -S \cos f + T \left(1+\frac{r}{p}\right) \sin f \right] \tag{22}
+\frac{dM}{dt} = n - \frac{2Sr}{na^2} - \frac{1-e^2}{nae} \left[ -S \cos f + T \left(1+\frac{r}{p}\right) \sin f \right] \qquad(22)
 $$
 
 式中：  
@@ -207,7 +209,7 @@ $M$ —— 平近点角。
 数值实现时，给定初始轨道根数 $\mathbf{X}_0 = [a_0,e_0,i_0,\Omega_0,\omega_0,M_0]^\top$，通过时间步进积分（如四阶 Runge‑Kutta 方法）即可获得任意时刻的轨道根数：
 
 $$
-\mathbf{X}(t) = \mathbf{X}_0 + \int_{t_0}^t \dot{\mathbf{X}}(\tau)\, d\tau \tag{23}
+\mathbf{X}(t) = \mathbf{X}_0 + \int_{t_0}^t \dot{\mathbf{X}}(\tau)\, d\tau \qquad(23)
 $$
 
 其中 $\dot{\mathbf{X}}$ 由式 (17)–(22) 计算所得，$S,T,N$ 由式 (5) 和 (6) 呈现。积分过程中每一步都需要调用大气密度模型（本文采用JB2008大气模型）获取当前时间序列以及当前位置的瞬时密度 $\rho$，进而更新 $\mathbf{v}_r$ 和 $\mathbf{a}_{\text{drag}}$。这种严格积分摄动方程的方法称为高斯变分数值法，能够较为精确的反映大气阻力对轨道半长轴衰减的体现，并不像仅依赖于能量耗散的宏观积分 [@frey2019]。
@@ -225,43 +227,43 @@ $$
 设卫星的真实状态 $\mathbf{x}(t)$ 满足运动方程  
 
 $$
-\frac{d\mathbf{x}}{dt} = \mathbf{f}_0(\mathbf{x}) + \varepsilon \mathbf{f}_1(\mathbf{x}, t), \tag{24}
+\frac{d\mathbf{x}}{dt} = \mathbf{f}_0(\mathbf{x}) + \varepsilon \mathbf{f}_1(\mathbf{x}, t), \qquad(24)
 $$
 
 其中 $\mathbf{f}_0$ 是 Kepler 主项，$\varepsilon \mathbf{f}_1$ 为小摄动项（$\varepsilon \ll 1$）。我们寻求一个近恒等变换  
 
 $$
-\mathbf{x} = \boldsymbol{\Phi}(\bar{\mathbf{x}}, t), \quad \boldsymbol{\Phi}(\bar{\mathbf{x}}, t) = \bar{\mathbf{x}} + \varepsilon \boldsymbol{\Phi}_1(\bar{\mathbf{x}}, t) + \varepsilon^2 \boldsymbol{\Phi}_2(\bar{\mathbf{x}}, t) + \cdots , \tag{25}
+\mathbf{x} = \boldsymbol{\Phi}(\bar{\mathbf{x}}, t), \quad \boldsymbol{\Phi}(\bar{\mathbf{x}}, t) = \bar{\mathbf{x}} + \varepsilon \boldsymbol{\Phi}_1(\bar{\mathbf{x}}, t) + \varepsilon^2 \boldsymbol{\Phi}_2(\bar{\mathbf{x}}, t) + \cdots , \qquad(25)
 $$
 
 使得变换后的平均状态 $\bar{\mathbf{x}}$ 满足平均化运动方程  
 
 $$
-\frac{d\bar{\mathbf{x}}}{dt} = \bar{\mathbf{f}}(\bar{\mathbf{x}}) + O(\varepsilon^2), \tag{26}
+\frac{d\bar{\mathbf{x}}}{dt} = \bar{\mathbf{f}}(\bar{\mathbf{x}}) + O(\varepsilon^2), \qquad(26)
 $$
 
 其中 $\bar{\mathbf{f}}$ 不显含时间（或仅含长周期变化）。数学上，这等价于对摄动项在轨道周期 $T$ 上取平均：
 
 $$
-\bar{\mathbf{f}}_1(\bar{\mathbf{x}}) = \frac{1}{T} \int_0^{T} \mathbf{f}_1\big(\boldsymbol{\Phi}(\bar{\mathbf{x}}, t), t\big) \, dt, \tag{27}
+\bar{\mathbf{f}}_1(\bar{\mathbf{x}}) = \frac{1}{T} \int_0^{T} \mathbf{f}_1\big(\boldsymbol{\Phi}(\bar{\mathbf{x}}, t), t\big) \, dt, \qquad(27)
 $$
 
 实际操作中通常对轨道根数建立平均变分方程。设 $\boldsymbol{\sigma}$ 为密切根数，其变分方程为  
 
 $$
-\frac{d\boldsymbol{\sigma}}{dt} = \sum_k \mathbf{g}_k(\boldsymbol{\sigma}, t), \tag{28}
+\frac{d\boldsymbol{\sigma}}{dt} = \sum_k \mathbf{g}_k(\boldsymbol{\sigma}, t), \qquad(28)
 $$
 
 其中 $\mathbf{g}_k$ 对应第 $k$ 种摄动加速度产生的根数变化率。平均根数 $\bar{\boldsymbol{\sigma}}$ 定义为  
 
 $$
-\bar{\boldsymbol{\sigma}}(t) = \langle \boldsymbol{\sigma}(t) \rangle = \lim_{T\to\infty} \frac{1}{T} \int_{t-T/2}^{t+T/2} \boldsymbol{\sigma}(\tau) \, d\tau, \tag{29}
+\bar{\boldsymbol{\sigma}}(t) = \langle \boldsymbol{\sigma}(t) \rangle = \lim_{T\to\infty} \frac{1}{T} \int_{t-T/2}^{t+T/2} \boldsymbol{\sigma}(\tau) \, d\tau, \qquad(29)
 $$
 
 去除了所有周期项。则平均根数的运动方程为  
 
 $$
-\frac{d\bar{\boldsymbol{\sigma}}}{dt} = \sum_k \mathbf{G}_k(\bar{\boldsymbol{\sigma}}), \tag{30}
+\frac{d\bar{\boldsymbol{\sigma}}}{dt} = \sum_k \mathbf{G}_k(\bar{\boldsymbol{\sigma}}), \qquad(30)
 $$
 
 其中 $\mathbf{G}_k$ 是 $\mathbf{g}_k$ 的平均化结果。
@@ -275,7 +277,7 @@ DSST（Draper Semi-analytical Satellite Theory）对每个摄动项分别推导�
 地球非球形引力势的带谐部分在轨道根数下的摄动函数（以 $J_2$ 为例）为  
 
 $$
-R_{J_2} = \frac{\mu J_2 R_e^2}{2 r^3} \left(3\sin^2\varphi - 1\right), \tag{31}
+R_{J_2} = \frac{\mu J_2 R_e^2}{2 r^3} \left(3\sin^2\varphi - 1\right), \qquad(31)
 $$
 
 其中 $R_e$ 为地球赤道半径，$\varphi$ 为地心纬度。经轨道要素展开并平均化后，得到长期变化率（拉格朗日行星方程的平均结果）[@brouwer1959]：
@@ -289,7 +291,7 @@ $$
 \frac{d\bar{\omega}}{dt} &= \frac{3}{4} J_2 \frac{R_e^2}{\bar{a}^2} n \frac{5\cos^2\bar{i} - 1}{(1-\bar{e}^2)^2}, \\[4pt]
 \frac{d\bar{M}}{dt} &= n + \frac{3}{4} J_2 \frac{R_e^2}{\bar{a}^2} n \frac{\sqrt{1-\bar{e}^2}(3\cos^2\bar{i} - 1)}{(1-\bar{e}^2)^2},
 \end{aligned}
-\tag{32}
+\qquad(32)
 $$
 
 其中 $n = \sqrt{\mu/\bar{a}^3}$ 为平均角速度。注意带谐项对 $\bar{a}, \bar{e}, \bar{i}$ 无长期贡献（仅引起短周期振荡），因此长期衰减主要由非保守力（大气阻力）主导。
@@ -299,13 +301,13 @@ $$
 对于大气阻力，摄动加速度为式 (5)。将其投影到 RTN 分量，代入高斯方程 (17)–(18) 得到 $\dot{a}$ 和 $\dot{e}$ 的瞬时表达式。在 DSST 中，采用共转大气假设，并认为密度随高度指数衰减，在轨道周期内对 $\dot{a}$ 取平均。忽略短周期变化，平均半长轴衰减率可写为 [@kinghele1964; @dersch2015]
 
 $$
-\frac{d\bar{a}}{dt} = -\frac{2}{\bar{n}} \frac{C_D A}{m} \bar{\rho} \bar{v}_r \bar{v}_t, \tag{33}
+\frac{d\bar{a}}{dt} = -\frac{2}{\bar{n}} \frac{C_D A}{m} \bar{\rho} \bar{v}_r \bar{v}_t, \qquad(33)
 $$
 
 其中 $\bar{\rho}$ 是轨道高度上的平均密度，$\bar{v}_r$ 是平均相对速度大小，$\bar{v}_t$ 是平均横向速度（近似为 $\sqrt{\mu/\bar{a}}$）。更严格的 DSST 实现采用密度沿轨积分的方式，利用 JB2008 模型输出沿轨道一圈的平均密度 $\langle \rho \rangle$，然后近似  
 
 $$
-\frac{d\bar{a}}{dt} \approx -\frac{2}{\bar{n}} \frac{C_D A}{m} \langle \rho \, v_r^2 \rangle, \tag{34}
+\frac{d\bar{a}}{dt} \approx -\frac{2}{\bar{n}} \frac{C_D A}{m} \langle \rho \, v_r^2 \rangle, \qquad(34)
 $$
 
 其中 $v_r^2 = v^2 + (\omega_e r)^2 - 2 v \omega_e r \cos\psi$，$\psi$ 为轨道面与赤道面的夹角。对于近圆轨道，可进一步简化。
@@ -315,7 +317,7 @@ $$
 太阳光压加速度模型为  
 
 $$
-\mathbf{a}_{\text{srp}} = -C_r \frac{A}{m} P_{\odot} \frac{(\mathbf{r} - \mathbf{r}_{\odot})}{\|\mathbf{r} - \mathbf{r}_{\odot}\|^3}, \tag{35}
+\mathbf{a}_{\text{srp}} = -C_r \frac{A}{m} P_{\odot} \frac{(\mathbf{r} - \mathbf{r}_{\odot})}{\|\mathbf{r} - \mathbf{r}_{\odot}\|^3}, \qquad(35)
 $$
 
 其中 $P_{\odot}$ 为太阳辐射压强（约 $4.56\times10^{-6}$ N/m²）。DSST 中将其平均化为沿速度方向和径向的长期效应，并引入日食因子。第三体（月球、太阳）引力摄动作为保守力，其平均化后得到 $\bar{\Omega}$、$\bar{\omega}$ 的长周期进动，对 $\bar{a}$ 无长期贡献 [@davidson2013]。
@@ -327,13 +329,13 @@ $$
 设正向映射 $\mathcal{P}$：给定平均根数 $\bar{\boldsymbol{\sigma}}$，通过添加所有力模型的短周期项得到密切根数  
 
 $$
-\boldsymbol{\sigma}_{\text{osc}} = \mathcal{P}(\bar{\boldsymbol{\sigma}}). \tag{36}
+\boldsymbol{\sigma}_{\text{osc}} = \mathcal{P}(\bar{\boldsymbol{\sigma}}). \qquad(36)
 $$
 
 其逆映射 $\mathcal{P}^{-1}$ 理论上存在，但难以直接解析表达。FixedPointConverter 通过迭代求解下列方程  
 
 $$
-\bar{\boldsymbol{\sigma}} = \bar{\boldsymbol{\sigma}} + \big( \boldsymbol{\sigma}_{\text{osc}}^{\text{true}} - \mathcal{P}(\bar{\boldsymbol{\sigma}}) \big) \tag{37}
+\bar{\boldsymbol{\sigma}} = \bar{\boldsymbol{\sigma}} + \big( \boldsymbol{\sigma}_{\text{osc}}^{\text{true}} - \mathcal{P}(\bar{\boldsymbol{\sigma}}) \big) \qquad(37)
 $$
 
 的固定点。具体迭代格式为：  
@@ -343,7 +345,7 @@ $$
 
    $$
    \boldsymbol{\sigma}_{\text{osc}}^{(\text{rec})} = \mathcal{P}(\bar{\boldsymbol{\sigma}}^{(k)}), \quad
-   \bar{\boldsymbol{\sigma}}^{(k+1)} = \bar{\boldsymbol{\sigma}}^{(k)} + \big( \boldsymbol{\sigma}_{\text{osc}}^{\text{true}} - \boldsymbol{\sigma}_{\text{osc}}^{(\text{rec})} \big); \tag{38}
+   \bar{\boldsymbol{\sigma}}^{(k+1)} = \bar{\boldsymbol{\sigma}}^{(k)} + \big( \boldsymbol{\sigma}_{\text{osc}}^{\text{true}} - \boldsymbol{\sigma}_{\text{osc}}^{(\text{rec})} \big); \qquad(38)
    $$
 
 当 $\|\bar{\boldsymbol{\sigma}}^{(k+1)} - \bar{\boldsymbol{\sigma}}^{(k)}\|$ 小于阈值时停止。
@@ -355,26 +357,26 @@ $$
 对于大气阻力主导的 LEO 卫星，平均半长轴 $\bar{a}(t)$ 在时间区间内近似线性衰减。设  
 
 $$
-\bar{a}(t) = a_0 + \dot{a} \cdot t + \delta a(t), \tag{39}
+\bar{a}(t) = a_0 + \dot{a} \cdot t + \delta a(t), \qquad(39)
 $$
 
 其中 $a_0$ 为初始平均半长轴，$\dot{a}$ 为线性衰减率（m/h），$\delta a(t)$ 为残余的短周期振荡及随机误差。通过最小二乘法拟合 $\dot{a}$ 和 $a_0$：
 
 $$
 \hat{\dot{a}} = \frac{\sum_{j=1}^{N} (t_j - \bar{t})(\bar{a}_j - \bar{\bar{a}})}{\sum_{j=1}^{N} (t_j - \bar{t})^2}, \quad
-\hat{a}_0 = \bar{\bar{a}} - \hat{\dot{a}} \bar{t}, \tag{40}
+\hat{a}_0 = \bar{\bar{a}} - \hat{\dot{a}} \bar{t}, \qquad(40)
 $$
 
 其中 $\bar{t} = \frac{1}{N}\sum t_j$，$\bar{\bar{a}} = \frac{1}{N}\sum \bar{a}_j$。拟合优度用决定系数评估：
 
 $$
-R^2 = 1 - \frac{\sum (\bar{a}_j - \hat{a}_0 - \hat{\dot{a}} t_j)^2}{\sum (\bar{a}_j - \bar{\bar{a}})^2}. \tag{41}
+R^2 = 1 - \frac{\sum (\bar{a}_j - \hat{a}_0 - \hat{\dot{a}} t_j)^2}{\sum (\bar{a}_j - \bar{\bar{a}})^2}. \qquad(41)
 $$
 
 残差序列  
 
 $$
-r_j = \bar{a}_j - (\hat{a}_0 + \hat{\dot{a}} t_j) \tag{42}
+r_j = \bar{a}_j - (\hat{a}_0 + \hat{\dot{a}} t_j) \qquad(42)
 $$
 
 残差值反映了短周期项的残留与力学模型模拟的误差。如果残差呈现明显的周期性（比如GRCE-A卫星的 90 分钟 轨道周期），说明短周期分离不足，可能需要增加更精准力模型或进行更高阶的球谐函数展开项；如果残差随机且均方根值较小证明平均轨道提取的较为成功。
@@ -386,13 +388,13 @@ $$
 对于以索引 $i$ 为中心、窗口长度 $N = 2m+1$（$m$ 为正整数，$N$ 为奇数）的滑动窗口，假设窗口内的数据点 $\{ (x_j, y_j) \}_{j=-m}^{m}$ 可用 $k$ 次多项式（$k < N$）进行局部拟合：
 
 $$
-p(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_k x^k, \tag{43}
+p(x) = c_0 + c_1 x + c_2 x^2 + \cdots + c_k x^k, \qquad(43)
 $$
 
 其中 $x_j$ 取等间距归一化坐标（通常令 $x_j = j$，窗口中心处 $x=0$），$y_j$ 为原始观测值。通过最小二乘法极小化残差平方和 $\sum_{j=-m}^{m} \bigl[ p(x_j) - y_j \bigr]^2$，确定多项式系数 $\{c_i\}$，则滤波后中心点的值即取多项式在 $x=0$ 处的估计值 $\tilde{y}_i = p(0) = c_0$。可以证明，该过程等价于对原始信号 $y_j$ 进行固定系数的卷积运算：
 
 $$
-\tilde{y}_i = \sum_{j=-m}^{m} h_j \, y_{i+j}, \tag{44}
+	ilde{y}_i = \sum_{j=-m}^{m} h_j \, y_{i+j}, \qquad(44)
 $$
 
 其中卷积系数 $\{h_j\}$ 仅由窗口半径 $m$ 和多项式阶数 $k$ 决定，与具体数据无关 [@Schafer2011]。在实际应用中，通常取 $k=2$ 或 $4$，窗口长度对应数十分钟至数小时的轨道弧段（例如 $m$ 对应 10~20 个轨道周期）。S‑G 滤波器不仅可以平滑半长轴序列，还能够计算中心点的导数（通过 $c_1$ 给出），从而直接估计瞬时衰减率。与事后最小二乘拟合相比，S‑G 滤波可实时处理流式数据，且对局部非线性的适应性更强，因此在星上自主轨道预报和地面批量预处理中均有应用。
